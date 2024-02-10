@@ -15,7 +15,7 @@ public class Main extends JavaPlugin {
 	
 	@Override
 	public void onDisable() {
-		System.out.println("Le plugin viens de s'éteindre");
+		System.out.println("Le plugin viens de s'éteindre");	
 	}
 	
 }
