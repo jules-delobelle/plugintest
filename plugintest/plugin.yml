@@ -1,0 +1,4 @@
+name: plugintest
+version: 0.1
+author: AkaAzee
+main: fr.akaazee.plugintest.Main
