@@ -2,3 +2,11 @@ name: plugintest
 version: 0.1
 author: AkaAzee
 main: fr.akaazee.plugintest.Main
+
+commands:
+  test:
+    description: Ceci est une commande test
+    permission: test.use
+  alert:
+    description: Ceci est un boadcast
+    permission: bc.use
