@@ -10,6 +10,7 @@ public class Main extends JavaPlugin {
 	public void onEnable() {
 		System.out.println("Le plugin viens de s'allumer");
 		getCommand("test").setExecutor(new CommandTest());
+		getCommand("alert").setExecutor(new CommandTest());
 	}
 	
 	@Override
