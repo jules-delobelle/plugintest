@@ -3,12 +3,14 @@ package fr.akaazee.plugintest;
 import java.util.Arrays;
 
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.Inventory;
@@ -58,21 +60,71 @@ public class PluginListerners implements Listener {
 			
 			Inventory inv = Bukkit.createInventory(null, 27, "§8Menu");
 			
-			ItemStack apple = new ItemStack(Material.APPLE, 1);
-			ItemMeta appleM = apple.getItemMeta();
-			appleM.setDisplayName("§cGamemode 1");
-			apple.setItemMeta(appleM);
-			
-			ItemStack anvilTnt = new ItemStack(Material.ANVIL, 1);
-			ItemMeta anvilM = anvilTnt.getItemMeta();
-			anvilM.setDisplayName("§cGive de TNT");
-			anvilTnt.setItemMeta(anvilM);
-			
-			inv.setItem(22, anvilTnt);
-			inv.setItem(13, apple);			
+			inv.setItem(22, getItem(Material.ANVIL, "§cGive de TNT", 1));
+			inv.setItem(13, getItem(Material.APPLE, "§eGamemode 1", 1));			
 			
 			player.openInventory(inv);
 			
 		}
 	}
+	
+	@EventHandler
+	public void onClick(InventoryClickEvent event) {
+		Inventory inv = event.getInventory();
+		Player player = (Player)event.getWhoClicked();
+		ItemStack current = event.getCurrentItem();
+		
+		if(current == null) return;
+		
+		if(inv.getName().equalsIgnoreCase("§8Menu")) {
+			
+			event.setCancelled(true);
+			
+			switch(current.getType()) {
+			
+			case APPLE:
+				player.closeInventory();
+				player.setGameMode(GameMode.CREATIVE);
+				break;
+				
+			case ANVIL:
+				player.getInventory().addItem(new ItemStack(Material.TNT, 3));
+				break;
+			
+			default:
+				break;
+			}
+		}
+	}
+	
+	public ItemStack getItem(Material material, String customName, int quantity) {
+		ItemStack it = new ItemStack(material, quantity);
+		ItemMeta itM = it.getItemMeta();
+		if(customName != null) itM.setDisplayName(customName);
+		it.setItemMeta(itM);
+		return it;
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
