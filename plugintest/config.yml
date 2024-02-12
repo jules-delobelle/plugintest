@@ -1,0 +1,10 @@
+messages:
+  # Message lors d'un /test
+  test: "&eMessage &bTest"
+kits:
+  soldats:
+    id: 5
+  boucher:
+    id: 3
+  fromagier:
+    id: 1 

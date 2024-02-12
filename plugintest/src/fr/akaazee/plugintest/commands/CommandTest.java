@@ -6,9 +6,15 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import net.md_5.bungee.api.ChatColor;
+import fr.akaazee.plugintest.Main;
 
 public class CommandTest implements CommandExecutor {
+	
+	private Main main;
+
+	public CommandTest(Main main) {
+		this.main = main;
+	}
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String msg, String[] args) {
@@ -17,7 +23,7 @@ public class CommandTest implements CommandExecutor {
 			Player player = (Player)sender;
 			
 			if(cmd.getName().equalsIgnoreCase("test")) {
-				player.sendMessage("§eMessage §bTest");
+				player.sendMessage(main.getConfig().getString("message.test").replace('&', '§'));
 				return true;
 			}
 			
