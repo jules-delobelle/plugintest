@@ -5,6 +5,10 @@ import java.util.Arrays;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
+import org.bukkit.World;
+import org.bukkit.WorldCreator;
+import org.bukkit.block.BlockState;
+import org.bukkit.block.Sign;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -19,6 +23,12 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 public class PluginListerners implements Listener {
+	
+	private Main main;
+	
+	public PluginListerners(Main main) {
+		this.main = main;
+	}
 	
 	@EventHandler
 	public void onJoin(PlayerJoinEvent event) {
@@ -49,6 +59,40 @@ public class PluginListerners implements Listener {
 		Player player = event.getPlayer();
 		Action action = event.getAction();
 		ItemStack it = event.getItem();
+		
+		if(event.getClickedBlock() != null && action == Action.RIGHT_CLICK_BLOCK) {
+			BlockState bs = event.getClickedBlock().getState();
+			if(bs instanceof Sign) {
+				
+				Sign sign = (Sign) bs;
+				
+				//clear
+				if(sign.getLine(0).equalsIgnoreCase("[Clear]") && sign.getLine(1).equalsIgnoreCase("all")) {
+					player.getInventory().clear();
+					player.sendMessage("Vous inventaire a été clear");
+				}
+				
+				//teleport Bungee
+				if(sign.getLine(0).equalsIgnoreCase("[Teleport]")) {
+					
+					if(sign.getLine(2) != null) {
+						
+						World targetWorld = Bukkit.getWorld(sign.getLine(2));
+						
+						if(targetWorld != null) {
+							player.teleport(targetWorld.getSpawnLocation());
+							player.sendMessage("Vous avez été téléporté vers " + targetWorld.getName());
+						}else{
+							WorldCreator creator = new WorldCreator(sign.getLine(2));
+							targetWorld = creator.createWorld();
+							player.teleport(targetWorld.getSpawnLocation());
+	                        player.sendMessage("Un nouveau monde a été créé. Vous avez été téléporté vers " + targetWorld.getName());
+						}
+					}
+					
+				}
+			}
+		}
 		
 		if(it == null) return;
 		

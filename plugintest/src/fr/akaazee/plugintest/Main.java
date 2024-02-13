@@ -1,5 +1,8 @@
 package fr.akaazee.plugintest;
 
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import fr.akaazee.plugintest.commands.CommandSpawn;
@@ -15,8 +18,10 @@ public class Main extends JavaPlugin {
 		System.out.println("Le plugin viens de s'allumer");
 		getCommand("test").setExecutor(new CommandTest(this));
 		getCommand("alert").setExecutor(new CommandTest(this));
+		getCommand("worldlist").setExecutor(new CommandTest(this));
 		getCommand("spawn").setExecutor(new CommandSpawn());
-		getServer().getPluginManager().registerEvents(new PluginListerners(), this);
+		getServer().getPluginManager().registerEvents(new PluginListerners(this), this);
+		getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
 		
 		String[] messages = {"Bienvenue sur le serv", "apacoubeh", "crampte"};
 		

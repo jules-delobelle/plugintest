@@ -12,4 +12,5 @@ commands:
     permission: bc.use
   spawn:
     description: Ceci est une commande pour se téléporter au spawn
-  
+  worldlist:
+    description: Donne la liste de tous les mondes sur le serveur

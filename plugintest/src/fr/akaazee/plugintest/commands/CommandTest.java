@@ -1,6 +1,7 @@
 package fr.akaazee.plugintest.commands;
 
 import org.bukkit.Bukkit;
+import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -42,6 +43,13 @@ public class CommandTest implements CommandExecutor {
 					Bukkit.broadcastMessage("[" + player.getName() + "] " + bc.toString());
 				}
 				return true;
+			}
+			if(cmd.getName().equalsIgnoreCase("worldlist")) {
+				String list = "List of the worlds : ";
+				for (World w : Bukkit.getServer().getWorlds()) {
+					list += w.getName() + ", ";
+				}
+				player.sendMessage(list);
 			}
 		}
 		
