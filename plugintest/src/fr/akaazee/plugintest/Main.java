@@ -1,8 +1,8 @@
 package fr.akaazee.plugintest;
 
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
+import org.bukkit.Bukkit;
+import org.bukkit.World;
+import org.bukkit.WorldBorder;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import fr.akaazee.plugintest.commands.CommandSpawn;
@@ -32,6 +32,21 @@ public class Main extends JavaPlugin {
 		TimerTask task = new TimerTask();
 		task.runTaskTimer(this, 0, 20);
 		
+		World world = Bukkit.getWorld("world");
+		WorldBorder wb = world.getWorldBorder();
+		wb.setCenter(0, 0);
+		wb.setSize(250);
+		Bukkit.getScheduler().runTaskTimer(this, new Runnable() {
+			
+			@Override
+			public void run() {
+				if(wb.getSize() >= 25) 
+				{
+				wb.setSize(wb.getSize() - 0.05);
+				}
+				
+			}
+		}, 0, 1);
 	}
 	
 	@Override
