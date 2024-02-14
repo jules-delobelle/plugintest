@@ -50,6 +50,8 @@ public class PluginListerners implements Listener {
 		ItemStack customwool = new ItemStack(Material.WOOL, 8, (byte)14);
 		player.getInventory().setHelmet(customwool);
 		
+		ItemStack skull = new ItemStack(Material.SKULL_ITEM);
+		
 		player.updateInventory();
 		
 	}
