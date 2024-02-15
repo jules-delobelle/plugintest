@@ -45,6 +45,7 @@ public class PluginListerners implements Listener {
 		customM.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 		customsword.setItemMeta(customM);
 		
+		//put sword in the inventory
 		player.getInventory().setItem(4, customsword);
 		
 		ItemStack customwool = new ItemStack(Material.WOOL, 8, (byte)14);
