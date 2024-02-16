@@ -61,7 +61,7 @@ public class CommandTest implements CommandExecutor {
 					player.teleport(targetWorld.getSpawnLocation());
 					player.sendMessage("Vous avez été téléporté vers " + targetWorld.getName());
 				}else {
-					player.sendMessage("&4Ce monde n'existe pas");
+					player.sendMessage("§4Ce monde n'existe pas");
 				}
 			}
 		}

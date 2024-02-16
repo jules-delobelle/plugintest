@@ -15,4 +15,3 @@ commands:
   worldlist:
     description: Donne la liste de tous les mondes sur le serveur
   swapworld:
-  	description: Permet de passer d'un à un autre

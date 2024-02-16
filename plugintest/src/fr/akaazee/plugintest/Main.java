@@ -30,24 +30,25 @@ public class Main extends JavaPlugin {
 			System.out.println(getConfig().getConfigurationSection("kits").getInt(string + ".id"));
 		}
 		
-		TimerTask task = new TimerTask();
-		task.runTaskTimer(this, 0, 20);
+		//TimerTask task = new TimerTask();
+		//task.runTaskTimer(this, 0, 20);
 		
 		World world = Bukkit.getWorld("world");
 		WorldBorder wb = world.getWorldBorder();
 		wb.setCenter(0, 0);
 		wb.setSize(250);
-		Bukkit.getScheduler().runTaskTimer(this, new Runnable() {
+		//Bukkit.getScheduler().runTaskTimer(this, new Runnable() {
 			
-			@Override
-			public void run() {
-				if(wb.getSize() >= 25) 
-				{
-				wb.setSize(wb.getSize() - 0.05);
-				}
+		//@Override
+		//public void run() {
+		//if(wb.getSize() >= 25) 
+		//{
+		//wb.setSize(wb.getSize() - 0.05);
+		//}
 				
-			}
-		}, 0, 1);
+		//}
+		//}, 0, 1);
+		
 	}
 	
 	@Override

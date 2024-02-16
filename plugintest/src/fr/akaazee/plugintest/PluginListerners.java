@@ -1,19 +1,24 @@
 package fr.akaazee.plugintest;
 
 import java.util.Arrays;
+import java.util.Random;
 
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.WorldCreator;
+import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Sign;
+import org.bukkit.block.Skull;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -21,6 +26,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.SkullMeta;
 
 public class PluginListerners implements Listener {
 	
@@ -51,11 +57,60 @@ public class PluginListerners implements Listener {
 		ItemStack customwool = new ItemStack(Material.WOOL, 8, (byte)14);
 		player.getInventory().setHelmet(customwool);
 		
-		ItemStack skull = new ItemStack(Material.SKULL_ITEM);
+		ItemStack skull = new ItemStack(Material.SKULL_ITEM, 1, (byte)3);
+		SkullMeta meta = (SkullMeta) skull.getItemMeta();
+		meta.setOwner("luck");
+		meta.setDisplayName("§eLucky Block");
+		skull.setItemMeta(meta);
+		
+		player.getInventory().addItem(skull);
+		
 		
 		player.updateInventory();
 		
 	}
+	
+	@SuppressWarnings("deprecation")
+	@EventHandler
+	public void onBreak(BlockBreakEvent event) {
+		
+		Player player = event.getPlayer();
+		Block block = event.getBlock();
+		BlockState bs = block.getState();
+		
+		if(bs instanceof Skull) {
+			Skull skull = (Skull) bs;
+			if(skull.getOwner().equalsIgnoreCase("Luck")) {
+				event.setCancelled(true);
+				block.setType(Material.AIR);
+				
+				Random random = new Random();
+				
+				switch(random.nextInt(4)) {
+					
+					case 0:
+						player.sendMessage("ratio");
+						break;
+						
+					case 1:
+						block.getWorld().dropItem(block.getLocation(), new ItemStack(Material.DIAMOND, 3));
+						break;
+						
+					case 2:
+						block.getWorld().spawnEntity(block.getLocation(), EntityType.CREEPER);
+						break;
+						
+					default:
+						block.getWorld().createExplosion(block.getLocation(), 40);
+						break;
+				
+				}
+				
+			}
+		}
+		
+	}
+	
 	@EventHandler
 	public void onInteract(PlayerInteractEvent event) {
 		
