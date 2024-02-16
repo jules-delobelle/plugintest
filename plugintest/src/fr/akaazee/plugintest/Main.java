@@ -19,6 +19,7 @@ public class Main extends JavaPlugin {
 		getCommand("test").setExecutor(new CommandTest(this));
 		getCommand("alert").setExecutor(new CommandTest(this));
 		getCommand("worldlist").setExecutor(new CommandTest(this));
+		getCommand("swapworld").setExecutor(new CommandTest(this));
 		getCommand("spawn").setExecutor(new CommandSpawn());
 		getServer().getPluginManager().registerEvents(new PluginListerners(this), this);
 		getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");

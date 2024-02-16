@@ -14,3 +14,5 @@ commands:
     description: Ceci est une commande pour se téléporter au spawn
   worldlist:
     description: Donne la liste de tous les mondes sur le serveur
+  swapworld:
+  	description: Permet de passer d'un à un autre

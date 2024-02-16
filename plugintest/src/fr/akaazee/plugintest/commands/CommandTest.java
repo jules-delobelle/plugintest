@@ -51,6 +51,19 @@ public class CommandTest implements CommandExecutor {
 				}
 				player.sendMessage(list);
 			}
+			if(cmd.getName().equalsIgnoreCase("swapworld")) {
+				
+				if(args.length > 1) return false;
+				
+				World targetWorld = Bukkit.getWorld(args[0]);
+				
+				if(targetWorld != null) {
+					player.teleport(targetWorld.getSpawnLocation());
+					player.sendMessage("Vous avez été téléporté vers " + targetWorld.getName());
+				}else {
+					player.sendMessage("&4Ce monde n'existe pas");
+				}
+			}
 		}
 		
 		return false;
