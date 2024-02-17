@@ -15,3 +15,7 @@ commands:
   worldlist:
     description: Donne la liste de tous les mondes sur le serveur
   swapworld:
+    description: Permet au joueur de changer de monde
+  event:
+    description: Permet de faire apparaître un coffre avec des items aléatoires
+    permission: chest.randomspawn

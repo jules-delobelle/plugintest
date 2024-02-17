@@ -3,8 +3,10 @@ package fr.akaazee.plugintest;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.WorldBorder;
+import org.bukkit.WorldCreator;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import fr.akaazee.plugintest.commands.CommandChestRandom;
 import fr.akaazee.plugintest.commands.CommandSpawn;
 import fr.akaazee.plugintest.commands.CommandTest;
 import fr.akaazee.plugintest.tasks.TimerTask;
@@ -20,10 +22,13 @@ public class Main extends JavaPlugin {
 		getCommand("alert").setExecutor(new CommandTest(this));
 		getCommand("worldlist").setExecutor(new CommandTest(this));
 		getCommand("swapworld").setExecutor(new CommandTest(this));
+		getCommand("event").setExecutor(new CommandChestRandom(this));
 		getCommand("spawn").setExecutor(new CommandSpawn());
 		getServer().getPluginManager().registerEvents(new PluginListerners(this), this);
 		getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
 		
+		WorldCreator creator = new WorldCreator("lobby2");
+		creator.createWorld();
 		String[] messages = {"Bienvenue sur le serv", "apacoubeh", "crampte"};
 		
 		for(String string : getConfig().getConfigurationSection("kits").getKeys(false)) {
